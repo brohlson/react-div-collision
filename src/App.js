@@ -65,8 +65,8 @@ export default function App() {
    */
 
   const isColliding = (a, b) => {
-    var aRect = a.getBoundingClientRect();
-    var bRect = b.getBoundingClientRect();
+    const aRect = a.getBoundingClientRect();
+    const bRect = b.getBoundingClientRect();
 
     return !(
       aRect.top + aRect.height < bRect.top ||
