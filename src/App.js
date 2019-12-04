@@ -59,6 +59,11 @@ export default function App() {
   const [light, setLight] = useState(false);
   const [textLight, setTextLight] = useState(false);
 
+  /**
+   * Determine if two things are touchin
+   * https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+   */
+
   const isColliding = (a, b) => {
     var aRect = a.getBoundingClientRect();
     var bRect = b.getBoundingClientRect();
@@ -72,12 +77,29 @@ export default function App() {
   };
 
   const detectCollision = (id, handler) => {
+    /**
+     * Gather ye dark elements
+     */
     const darkElements = document.querySelectorAll('.dark');
-    const myIcon = document.getElementById(id);
+
+    /**
+     * Get your thing you passed in by ID
+     */
+    const myThing = document.getElementById(id);
+
+    /**
+     * Apparently you cant reduce a NodeList,
+     * so we have to use forEach like dinosaurs.
+     */
     const collisions = [];
     darkElements.forEach(currentElement =>
-      collisions.push(isColliding(currentElement, myIcon))
+      collisions.push(isColliding(currentElement, myThing))
     );
+    /**
+     * If any are colliding, handle it with the state handler
+     * we passed in.  You could probably just return a boolean
+     * here too.  Thats probably better on second thought.
+     */
     handler(collisions.includes(true));
   };
 
